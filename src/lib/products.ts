@@ -129,7 +129,8 @@ export const WHATSAPP_NUMBER = "923344739333";
 export const WHATSAPP_DISPLAY = "+92 3344739333";
 export const SUPPORT_EMAIL = "abubakarmoeenusmani@gmail.com";
 
-export const whatsappOrderLink = (product: Product) => {
-  const msg = `Hi! I want to order ${product.name} from Usmania Vision Co. Price: ${formatPrice(product.price)}. Please confirm availability.`;
+export const whatsappOrderLink = (product: Product, color?: string) => {
+  const colorPart = color ? ` Color: ${color}.` : "";
+  const msg = `Hi! I want to order ${product.name} from Usmania Vision Co. Price: ${formatPrice(product.price)}.${colorPart} Please confirm availability.`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 };
