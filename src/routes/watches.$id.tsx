@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { findProduct, formatPrice, whatsappOrderLink } from "@/lib/products";
-import { Tag, Star, ArrowLeft } from "lucide-react";
+import { Tag, Star, ArrowLeft, Check } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/watches/$id")({
@@ -55,17 +55,29 @@ function WatchDetail() {
           <p className="mt-5 text-white/80 max-w-2xl leading-relaxed">{product.description}</p>
 
           <div className="mt-6">
-            <div className="text-sm text-white/60 mb-2">Color: <span className="text-white">{color}</span></div>
-            <div className="flex gap-2">
-              {COLORS.map((c) => (
-                <button
-                  key={c.name}
-                  onClick={() => setColor(c.name)}
-                  aria-label={c.name}
-                  className={`h-9 w-9 rounded-full border-2 transition ${color === c.name ? "border-gold scale-110" : "border-white/20"}`}
-                  style={{ backgroundColor: c.value }}
-                />
-              ))}
+            <div className="text-sm text-white/60 mb-3">Color: <span className="text-white font-medium">{color}</span></div>
+            <div className="flex gap-3 flex-wrap">
+              {COLORS.map((c) => {
+                const selected = color === c.name;
+                return (
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => setColor(c.name)}
+                    aria-label={c.name}
+                    aria-pressed={selected}
+                    title={c.name}
+                    className={`relative h-10 w-10 rounded-full transition-transform duration-200 ring-offset-2 ring-offset-navy ${
+                      selected ? "ring-2 ring-gold scale-110" : "ring-1 ring-white/25 hover:scale-105"
+                    }`}
+                    style={{ backgroundColor: c.value }}
+                  >
+                    {selected && (
+                      <Check className="absolute inset-0 m-auto h-5 w-5 text-white drop-shadow" strokeWidth={3} />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
