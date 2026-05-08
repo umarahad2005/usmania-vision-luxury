@@ -9,38 +9,194 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StoryRouteImport } from './routes/story'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WatchesIndexRouteImport } from './routes/watches.index'
+import { Route as GlassesIndexRouteImport } from './routes/glasses.index'
+import { Route as WatchesIdRouteImport } from './routes/watches.$id'
+import { Route as GlassesIdRouteImport } from './routes/glasses.$id'
 
+const StoryRoute = StoryRouteImport.update({
+  id: '/story',
+  path: '/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WatchesIndexRoute = WatchesIndexRouteImport.update({
+  id: '/watches/',
+  path: '/watches/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlassesIndexRoute = GlassesIndexRouteImport.update({
+  id: '/glasses/',
+  path: '/glasses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WatchesIdRoute = WatchesIdRouteImport.update({
+  id: '/watches/$id',
+  path: '/watches/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlassesIdRoute = GlassesIdRouteImport.update({
+  id: '/glasses/$id',
+  path: '/glasses/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/story': typeof StoryRoute
+  '/glasses/$id': typeof GlassesIdRoute
+  '/watches/$id': typeof WatchesIdRoute
+  '/glasses/': typeof GlassesIndexRoute
+  '/watches/': typeof WatchesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/story': typeof StoryRoute
+  '/glasses/$id': typeof GlassesIdRoute
+  '/watches/$id': typeof WatchesIdRoute
+  '/glasses': typeof GlassesIndexRoute
+  '/watches': typeof WatchesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
+  '/contact': typeof ContactRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/story': typeof StoryRoute
+  '/glasses/$id': typeof GlassesIdRoute
+  '/watches/$id': typeof WatchesIdRoute
+  '/glasses/': typeof GlassesIndexRoute
+  '/watches/': typeof WatchesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/login'
+    | '/signup'
+    | '/story'
+    | '/glasses/$id'
+    | '/watches/$id'
+    | '/glasses/'
+    | '/watches/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/login'
+    | '/signup'
+    | '/story'
+    | '/glasses/$id'
+    | '/watches/$id'
+    | '/glasses'
+    | '/watches'
+  id:
+    | '__root__'
+    | '/'
+    | '/cart'
+    | '/contact'
+    | '/login'
+    | '/signup'
+    | '/story'
+    | '/glasses/$id'
+    | '/watches/$id'
+    | '/glasses/'
+    | '/watches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
+  ContactRoute: typeof ContactRoute
+  LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
+  StoryRoute: typeof StoryRoute
+  GlassesIdRoute: typeof GlassesIdRoute
+  WatchesIdRoute: typeof WatchesIdRoute
+  GlassesIndexRoute: typeof GlassesIndexRoute
+  WatchesIndexRoute: typeof WatchesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/story': {
+      id: '/story'
+      path: '/story'
+      fullPath: '/story'
+      preLoaderRoute: typeof StoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +204,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/watches/': {
+      id: '/watches/'
+      path: '/watches'
+      fullPath: '/watches/'
+      preLoaderRoute: typeof WatchesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glasses/': {
+      id: '/glasses/'
+      path: '/glasses'
+      fullPath: '/glasses/'
+      preLoaderRoute: typeof GlassesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/watches/$id': {
+      id: '/watches/$id'
+      path: '/watches/$id'
+      fullPath: '/watches/$id'
+      preLoaderRoute: typeof WatchesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glasses/$id': {
+      id: '/glasses/$id'
+      path: '/glasses/$id'
+      fullPath: '/glasses/$id'
+      preLoaderRoute: typeof GlassesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
+  ContactRoute: ContactRoute,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
+  StoryRoute: StoryRoute,
+  GlassesIdRoute: GlassesIdRoute,
+  WatchesIdRoute: WatchesIdRoute,
+  GlassesIndexRoute: GlassesIndexRoute,
+  WatchesIndexRoute: WatchesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
