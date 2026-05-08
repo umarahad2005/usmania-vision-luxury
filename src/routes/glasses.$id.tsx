@@ -99,7 +99,7 @@ function GlassDetail() {
           </div>
 
           <a
-            href={whatsappOrderLink(product)}
+            href={whatsappOrderLink(product, color)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 w-full inline-flex items-center justify-center px-6 py-4 rounded-full bg-white text-navy font-semibold hover:bg-gold hover:text-gold-foreground transition-colors"
