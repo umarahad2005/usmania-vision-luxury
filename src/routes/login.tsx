@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth-context";
+import { loginFn } from "@/routes/api/auth/login";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,12 +20,15 @@ function LoginPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) toast.error(error.message);
-    else {
+    try {
+      const result = await loginFn({ data: { email, password } });
+      setAuth(result.user, result.token);
       toast.success("Welcome back!");
       navigate({ to: "/" });
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Login failed.");
+    } finally {
+      setLoading(false);
     }
   };
 

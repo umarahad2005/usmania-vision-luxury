@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth-context";
+import { signupFn } from "@/routes/api/auth/signup";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/signup")({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/signup")({
 
 function SignupPage() {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,19 +21,15 @@ function SignupPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: name },
-        emailRedirectTo: typeof window !== "undefined" ? window.location.origin : undefined,
-      },
-    });
-    setLoading(false);
-    if (error) toast.error(error.message);
-    else {
-      toast.success("Account created. Check your email to verify.");
+    try {
+      const result = await signupFn({ data: { name, email, password } });
+      setAuth(result.user, result.token);
+      toast.success("Account created! Welcome to Usmania Vision Co.");
       navigate({ to: "/" });
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Signup failed.");
+    } finally {
+      setLoading(false);
     }
   };
 

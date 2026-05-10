@@ -1,0 +1,34 @@
+{
+  "project": "usmania-vision-luxury",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-10",
+  "stack": {
+    "framework": "TanStack Start v1 (SSR)",
+    "runtime": "Vercel Edge",
+    "database": "MongoDB Atlas",
+    "auth": "JWT (jose)",
+    "media": "Cloudinary",
+    "email": "Brevo",
+    "animations": "GSAP + Three.js + Lenis",
+    "styling": "TailwindCSS v4"
+  },
+  "routes": [
+    "/",
+    "/watches",
+    "/watches/:id",
+    "/glasses",
+    "/glasses/:id",
+    "/cart",
+    "/story",
+    "/contact",
+    "/login",
+    "/signup"
+  ],
+  "apiEndpoints": [
+    "/api/auth/login",
+    "/api/auth/signup",
+    "/api/contact"
+  ],
+  "completedPhases": ["agents-folder", "mongodb-migration", "gsap-animations"],
+  "nextSteps": ["Deploy to Vercel", "Add admin dashboard", "Add real orders to MongoDB"]
+}
